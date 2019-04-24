@@ -1,11 +1,7 @@
 <template>
   <div id="app">
-index
-
-    <!-- 调用Element UI组件 -->
-    <el-row>
-      <el-button type="primary">主要按钮</el-button>
-    </el-row>
+    <router-link to="/login">跳转登录页面</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
