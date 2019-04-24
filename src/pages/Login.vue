@@ -10,7 +10,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">登录</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="oncancle()">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -32,8 +32,18 @@ export default {
       this.$axios
         .post("http://127.0.0.1:8899/admin/account/login", this.form)
         .then(function(response) {
-          console.log(response);
+          // console.log(response);
+          //登录成功之后就跳转admin中得到goods-list页面
+          this.$router.push({
+            path:'/admin'
+          })
+
         });
+    },
+    oncancle:function(){
+      //点击取消清除掉表单元素
+      this.form.uname="";
+      this.form.upwd="";
     }
   }
 };

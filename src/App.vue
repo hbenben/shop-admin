@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-link to="/login">跳转登录页面</router-link>
+    <!-- <router-link to="/login">跳转登录页面</router-link> -->
     <router-view></router-view>
   </div>
 </template>
