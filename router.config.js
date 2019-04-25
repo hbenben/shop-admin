@@ -1,14 +1,13 @@
 //这里进行路由的配置，然后在main.js中欧冠引入好就行了
 import Login from './src/pages/Login.vue';
 //引入登录成功之后的组件
-import Admin from './src/pages/goods/GoodList';
+import Admin from './src/pages/Admin';
 
 var routes=[
   {
-    //后台的首页，然后要路由重定向到登录页面
+    //路由重定向
     path:'/',
-    redirect:'/login',
-    name:'login'
+    redirect:'/login'
   },
   {
     //登录页面的路由
@@ -17,10 +16,9 @@ var routes=[
     name:'login'
   },
   {
-    //登录成功之后实现跳转到后台管理页面admin
+    //登录成功之后的页面
     path:'/admin',
     component:Admin,
-    redirection:'admin/goods-list',
     name:'admin'
   }
 ]

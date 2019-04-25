@@ -38,7 +38,7 @@ export default {
           const {status,message}=res.data;
             if(status==0){
               //登录成功，跳转页面,注意这里的this.$router假如使用function的话，是不能识别router，因为this 的指向不一样，要使用箭头函数，this 的指向就是window，function的this指向是上面的对象
-              this.$router.push('./goods/GoodList.vue');
+              this.$router.push('./admin');
             }else{
               //登录失败
               this.$message({
