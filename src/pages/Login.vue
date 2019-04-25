@@ -1,7 +1,7 @@
 <template>
   <div class="login-form">
     <el-form :model="form" label-width="100px">
-      <span>登录</span>
+      <p class="login-title">登录</p>
       <el-form-item label="账号" prop="pass">
         <!-- 双向数据绑定 -->
         <el-input type="text" v-model="form.uname"></el-input>
@@ -9,7 +9,7 @@
       <el-form-item label="密码" prop="checkPass">
         <el-input type="password" v-model="form.upwd"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item class="fromSubmit">
         <el-button type="primary" @click="onSubmit">登录</el-button>
         <el-button @click="oncancle()">取消</el-button>
       </el-form-item>
@@ -64,10 +64,16 @@ export default {
   left: 50%;
   top: 50%;
   margin: -200px 0 0 -225px;
+  
 }
 .login-title {
   text-align: center;
+  margin-left: 80px;
   color: #409eff;
   font-size: 16px;
+  line-height: 50px;
+}
+.fromSubmit {
+  margin-left: 80px;
 }
 </style>
