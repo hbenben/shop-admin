@@ -1,6 +1,7 @@
 <template>
   <div class="login-form">
     <el-form :model="form" label-width="100px">
+      <span>登录</span>
       <el-form-item label="账号" prop="pass">
         <!-- 双向数据绑定 -->
         <el-input type="text" v-model="form.uname"></el-input>
@@ -31,13 +32,21 @@ export default {
       console.log("提交");
       this.$axios
         .post("http://127.0.0.1:8899/admin/account/login", this.form)
-        .then(function(response) {
-          // console.log(response);
-          //登录成功之后就跳转admin中得到goods-list页面
-          this.$router.push({
-            path:'/admin'
-          })
-
+        .then((res)=> {
+          console.log(res);
+          // 使用解构赋值的方式
+          const {status,message}=res.data;
+            if(status==0){
+              //登录成功，跳转页面,注意这里的this.$router假如使用function的话，是不能识别router，因为this 的指向不一样，要使用箭头函数，this 的指向就是window，function的this指向是上面的对象
+              this.$router.push('./goods/GoodList.vue');
+            }else{
+              //登录失败
+              this.$message({
+                message:message,
+                type:'success'
+              })
+              // alert('登陆失败')
+            }
         });
     },
     oncancle:function(){
@@ -48,7 +57,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style scoped lang="less">
 .login-form {
   width: 400px;
   position: absolute;
