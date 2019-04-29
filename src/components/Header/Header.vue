@@ -8,7 +8,7 @@
   <el-row type="flex" justify="space-between" align="middle">
    <i @click="handleLogout" class="el-icon-back"></i>
    <div>
-     admin 超级管理员 <span class="logout">退出</span>
+     admin 超级管理员 <span class="logout" @click="handleExit">退出</span>
    </div>
   </el-row>
 </template>
@@ -21,6 +21,13 @@ export default {
     //子组件自定义事件名handleLogout，就是：handleLogout=“父组件的事件名”，其中:handleLigout是子组件的事件名
     handleLogout:function(){
       this.$emit("handleLogout")
+    },
+    //退出登录
+    handleExit:function(){
+      this.$axios({
+        method:'get',
+        url:'http://127.0.0.1:8899/admin/account/logout'
+      })
     }
   }
 };
