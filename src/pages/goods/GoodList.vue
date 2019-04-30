@@ -16,11 +16,8 @@
       </el-col>
       <el-col>
         <div>
-          <el-input placeholder="请输入内容">
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-            ></el-button>
+          <el-input placeholder="请输入内容" v-model="searchValue">
+             <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
           </el-input>
         </div>
       </el-col>
@@ -91,6 +88,23 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 添加分页功能 -->
+    <!-- size-change修改条数触发
+    current-change切换到当前页的事件
+    current-page默认当前的页数
+    page-size默认条数
+    layout式布局
+    total表示总条数 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageIndex"
+      :page-sizes="[2, 4, 8, 16]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="totalCount"
+    >
+    </el-pagination>
   </div>
 </template>
 
@@ -101,22 +115,50 @@ export default {
   data() {
     return {
       tableData: [],
-      ids: []
+      ids: [],
+       // 默认条数
+        pageSize: 4,
+        // 当前的页面
+        pageIndex: 1,
+        // 总条数
+        totalCount: 0,
+        // 输入框的值,用来搜索框搜索
+        searchValue: ""
     }
   },
 
   //先要获取数据，封装获取数据的初始化，因为要多次调用
   methods: {
+    // 修改条数的事件，val是条数,是改变条数的默认值
+    handleSizeChange(val){
+      this.pageSize=val;
+      console.log(val);
+      this.getList()
+    },
+    // 当前页的事件，val当前是多少页
+    handleCurrentChange(val){
+      this.pageIndex=val
+      console.log(val)
+      this.getList()
+      // console.log(this.searchValue);
+    },
+    //输入搜索内容
+    handleSearch(){
+      this.getList()
+    },
     getList() {
       //  /admin/goods/getlist?pageIndex=页码&pageSize=每页显示条数&searchvalue=模糊匹配标题条件
       this.$axios({
+        // /动态获取数据
         method: 'get',
-        url: '/admin/goods/getlist?pageIndex=1&pageSize=4&searchvalue='
+        url: `/admin/goods/getlist?pageIndex=${this.pageIndex}&pageSize=${this.pageSize}&searchvalue=${this.searchValue}`
       }).then(res => {
         //成功获取数据之后，要进行对数据的渲染
         console.log(res);
-        const { message } = res.data
+        const { message,totalcount } = res.data
         this.tableData = message;
+        // 赋值给总条数
+        this.totalCount = totalcount;
       })
     },
 
