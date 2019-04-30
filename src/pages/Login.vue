@@ -25,8 +25,8 @@ export default {
   data() {
     return {
       form: {
-        uname: "",
-        upwd: ""
+        uname: "admin",
+        upwd: "123456"
       },
       //这里进行表单的验证
       rules: {
@@ -77,7 +77,7 @@ export default {
             this.$router.push("/admin");
           }else{
             //登录失败,提示信息
-            this.message({
+            this.$message({
               //将后台返回登录错误的信息提示，显示出来
               message:message,
               type:'success'

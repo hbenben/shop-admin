@@ -10,7 +10,21 @@
         <el-header>
           <Header @handleLogout="handleLogout"></Header>
         </el-header>
-        <el-main>Main</el-main>
+        <!-- 这个是中间的内容 -->
+        <el-main>
+          <!-- 面包屑组件 -->
+          <el-breadcrumb separator="/">
+            <!-- 这里使用循环和路由的meta进行渲染 -->
+            <el-breadcrumb-item 
+            v-for="(item,index) in routerInfo"
+            :key="index"
+
+            >{{item}}</el-breadcrumb-item>
+          </el-breadcrumb>
+
+          <!-- 这个显示内容的页面,就是展示子页面 -->
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -25,21 +39,31 @@ export default {
   //2注册组件
   components: {
     Aside,
-    Header
+    Header,
   },
   // 第一步先设置data数据，把值传给Aside组件
-  data(){
-    return{
-      isCollapse:false
+  data() {
+    return {
+      isCollapse: false
     }
   },
   // 第四步，父组件通过事件名接收到子组件传过来的数据
-  methods:{
-    handleLogout:function(){
-      this.isCollapse=!this.isCollapse
+  methods: {
+    handleLogout: function () {
+      this.isCollapse = !this.isCollapse
+    }
+  },
+  computed: {
+    //这里实现面包屑，通过监听路由，获取信息
+    routerInfo() {
+      const arr = this.$route.matched.map(v => {
+        return v.meta;
+      })
+      //将最后整个数组返回出去循环
+      return arr;
     }
   }
- 
+
 };
 </script>
 
@@ -48,39 +72,39 @@ export default {
   padding: 0;
   margin: 0;
 }
- .el-header{
-    background-color: #fff;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
-  
-  .el-aside {
-    background-color: #D3DCE6;
-    position: relative
-  }
-  
-  .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
-  
-  /* 首页布局的高度需要修改为100% */
-  .admin-container > .el-container {
-    position:absolute;
-    width:100%;
-    top:0; 
-    bottom:0;     
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
-  }
+.el-header {
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-aside {
+  background-color: #d3dce6;
+  position: relative;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  /* text-align: center; */
+  /* line-height: 160px; */
+}
+
+/* 首页布局的高度需要修改为100% */
+.admin-container > .el-container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
 </style>
