@@ -1,5 +1,5 @@
 <template>
-  <div>登陆成功之后的首页</div>
+  <div>这个是商品列表，渲染在main中</div>
 </template>
 
 <script>

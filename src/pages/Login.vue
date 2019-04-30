@@ -61,7 +61,7 @@ export default {
         if (!valid) return;
         this.$axios({
           method:"post",
-          url:'http://127.0.0.1:8899/admin/account/login',
+          url:'/admin/account/login',
           data:this.form,
           //处理跨域请求
           withCredentials:true
@@ -71,6 +71,9 @@ export default {
           //判断是否登录成功
           if(status==0){
             //调到后台的首页
+            //登录成功之后要将用户信息保存吗，使用localstorage
+            localStorage.setItem('username',message.uname);
+            localStorage.setItem('realname',message.realname);
             this.$router.push("/admin");
           }else{
             //登录失败,提示信息

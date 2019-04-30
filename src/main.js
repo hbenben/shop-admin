@@ -22,8 +22,16 @@ Vue.use(VueRouter);
 // ];
 //9创建路由对象
 const router = new VueRouter({routes})
+//路由守卫，路由拦截器,先创建路由对象，利用路由对象总的方法来实现路由拦截
+// router.beforeEach((to,from,next)=>{
 
+// })
+
+// 是否是生成环境,阻止vue的警告，在console.log中生成的警告
+Vue.config.productionTip = false;
 Vue.prototype.$axios=axios;
+//公共的路由前缀，每次axios请求的时候都会自动加上这串路由
+axios.defaults.baseURL="http://localhost:8899"
 
 Vue.config.productionTip = false
 
