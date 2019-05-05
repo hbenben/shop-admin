@@ -8,7 +8,7 @@
       style="margin-top: 15px;"
     >
       <el-col>
-        <el-button type="primary">增加</el-button>
+        <el-button type="primary" @click="handleAddVue">增加</el-button>
         <el-button
           type="primary"
           @click="handleMoreDelete"
@@ -217,7 +217,10 @@ export default {
         //删除成功之后重新获取数据列表
         this.getList();
       })
-
+    },
+    //跳转到增加页面，注意是路由的跳转，不是直接写页面.在路由配置中实现
+    handleAddVue(){
+      this.$router.push(`/admin/goods-add`);
     }
 
   },

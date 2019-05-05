@@ -4,6 +4,8 @@ import Login from './src/pages/Login.vue'
 import Admin from './src/pages/Admin.vue'
 //引入商品列表的组件
 import GoodsList from './src/pages/goods/GoodList.vue'
+//引入添加商品的组件
+import GoodsAdd from './src/pages/goods/GoodsAdd.vue'
 
 var routes=[
   {
@@ -26,11 +28,18 @@ var routes=[
     meta:'后台管理',
     children:[
       {
-        //注意子代不能添加/
+        //注意子代不能添加/   
+        //这个是商品列表
         path:'goods-list',
         component:GoodsList,
         name:'goods-list',
         meta:'商品列表'
+      },
+      {
+        path:'goods-add',
+        component:GoodsAdd,
+        name:'goods-add',
+        meta:'添加商品'
       }
     ]
   }
