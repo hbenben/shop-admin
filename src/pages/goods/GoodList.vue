@@ -165,6 +165,8 @@ export default {
     // table组件中的方法
     handleEdit(index, row) {
       console.log(index, row);
+      //点击编辑之后要实现路由的跳转,需要携带对应的参数
+      this.$router.push(`/admin/goods-editor/${row.id}`);
     },
     // 删除单个数据
     handleDelete(index, row) {

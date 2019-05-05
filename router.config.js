@@ -6,6 +6,8 @@ import Admin from './src/pages/Admin.vue'
 import GoodsList from './src/pages/goods/GoodList.vue'
 //引入添加商品的组件
 import GoodsAdd from './src/pages/goods/GoodsAdd.vue'
+//引入编辑页面的组件
+import GoodsEditor from './src/pages/goods/GoodsEditor.vue'
 
 var routes=[
   {
@@ -40,6 +42,14 @@ var routes=[
         component:GoodsAdd,
         name:'goods-add',
         meta:'添加商品'
+      },
+      {
+        //注意这里是携带参数的
+        path:'goods-editor/:id',
+        component:GoodsEditor,
+        name:'goods-editor',
+        meta:'编辑商品'
+
       }
     ]
   }
